@@ -1,9 +1,5 @@
-import * as CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 
-// Get environment variables
-const SECRET_KEY =
-  process.env.NEXT_PUBLIC_ENCRYPTION_KEY || "quickbidz-secret-key";
 const COOKIE_DOMAIN = process.env.NEXT_PUBLIC_COOKIE_DOMAIN || "localhost";
 
 interface AuthTokens {
@@ -21,17 +17,6 @@ export const COOKIE_NAMES = {
     process.env.NEXT_PUBLIC_COOKIE_REFRESH_TOKEN_KEY || "quickbids-rt",
   id: process.env.NEXT_PUBLIC_COOKIE_ID_KEY || "id",
   tenant: process.env.NEXT_PUBLIC_COOKIE_TENANT_KEY || "t",
-};
-
-// Encrypt token
-export const encryptToken = (token: string): string => {
-  return CryptoJS.AES.encrypt(token, SECRET_KEY).toString();
-};
-
-// Decrypt token
-export const decryptToken = (encryptedToken: string): string => {
-  const bytes = CryptoJS.AES.decrypt(encryptedToken, SECRET_KEY);
-  return bytes.toString(CryptoJS.enc.Utf8);
 };
 
 // Set cookies
